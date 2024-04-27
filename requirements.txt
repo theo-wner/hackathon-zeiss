@@ -1,5 +1,3 @@
 opencv-python
 ultralytics
-
-# GUI Testing
-tk 
+pillow

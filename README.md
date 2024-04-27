@@ -2,7 +2,7 @@
 ## Team 2: PhotoLab
 
 ### Python Version used:
-conda create --name hackathon python=3.9
+conda create --name hackathon python=3.12
 
 ### GitHub Documentation
 1. git clone https://github.com/theo-wner/hackathon-zeiss.git
@@ -16,6 +16,10 @@ conda create --name hackathon python=3.9
 email:robert.langendoerfer@gmx.net
 pwd:  S"Vanjnmr2Ai7;x
 ### IDS malibu ip
-169.254.75.124
+http://169.254.75.124
+### IDS Single Image
+http://169.254.75.124/camera/image
+### IDS Video Stream
+http://169.254.75.124/streaming/stream3/video.mjpeg
 ### IDS Theos Thinkpad ip
 169.254.75.125
