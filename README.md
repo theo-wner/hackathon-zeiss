@@ -17,5 +17,9 @@ email:robert.langendoerfer@gmx.net
 pwd:  S"Vanjnmr2Ai7;x
 ### IDS malibu ip
 169.254.75.124
+### IDS Single Image
+http://169.254.75.124/camera/image
+### IDS Video Stream
+http://169.254.75.124/streaming/stream3/video.mjpeg
 ### IDS Theos Thinkpad ip
 169.254.75.125
