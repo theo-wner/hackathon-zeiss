@@ -1,22 +1,29 @@
+import cv2
+import json
 from ultralytics import YOLO
+import torch
 
 model = YOLO("yolo-Weights/yolov8n-pose.pt")
 
-# return a generator of Results objects
-results = model.predict(source="0", stream=True)
+source = "0"
+results = model.predict(source=source, stream=True)
+
+frame_count = 0
 
 for result in results:
-    #boxes = result.boxes  # Boxes object for bounding box outputs
-    #masks = result.masks  # Masks object for segmentation masks outputs
-    keypoints = result.keypoints  # Keypoints object for pose outputs
-    #probs = result.probs  # Probs object for classification outputs
-    #obb = result.obb  # Oriented boxes object for OBB outputs
-    print(keypoints.xyn)
+    keypoints = result.keypoints
 
-    result.show()  # display to screen
+    filename = f'txt/keypoints_data_{frame_count}.txt'
 
+    with open(filename, 'w') as f:
+        data_list = keypoints.xyn.cpu().numpy().tolist()
+        json.dump(data_list, f)
 
+    frame_count += 1
 
+    result.show()
 
+    if frame_count >= 10:
+        break
 
-
+model.close()
