@@ -6,7 +6,7 @@ import torch
 # YOLO-Modell initialisieren
 model = YOLO("yolo-Weights/yolov8n-pose.pt")
 
-source = "1"
+source = "0"
 results = model.predict(source=source, stream=True)
 
 font = cv2.FONT_HERSHEY_SIMPLEX
