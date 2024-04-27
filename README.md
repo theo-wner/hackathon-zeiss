@@ -15,3 +15,5 @@ conda create --name hackathon python=3.9y
 ### ids anmeldedaten
 email:robert.langendoerfer@gmx.net
 pwd:  S"Vanjnmr2Ai7;x
+### ids malibu ip
+169.254.75.124
