@@ -2,7 +2,7 @@
 ## Team 2: PhotoLab
 
 ### Python Version used:
-conda create --name hackathon python=3.9
+conda create --name hackathon python=3.12
 
 ### GitHub Documentation
 1. git clone https://github.com/theo-wner/hackathon-zeiss.git
