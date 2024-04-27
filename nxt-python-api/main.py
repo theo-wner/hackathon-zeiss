@@ -1,3 +1,5 @@
+import time
+
 import cv2
 from matplotlib import pyplot as plt
 from nxt_rest_connection import NXTRestConnection
@@ -21,9 +23,11 @@ app = App()
 
 for img in yield_pose_images(camera_handler, model):
     app.update()
+    # app.update_idletasks()
     img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
     img = Image.fromarray(img)
     app.change_image(img)
+    app.slider_label.configure(text=f"Joint Angle: {app.slider_1.get():.0f} degrees")
 
     # cv2.imshow('Video', img) # this does not work 
     # cv2.imwrite('test.jpg', img)  # this works! 

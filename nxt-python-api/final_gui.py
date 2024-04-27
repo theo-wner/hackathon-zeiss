@@ -38,6 +38,16 @@ class App(customtkinter.CTk):
         self.sidebar_button_3 = customtkinter.CTkRadioButton(master=self.radiobutton_frame, variable=self.radio_var, value=2, text="Pushup", command=self.sidebar_button_event)
         self.sidebar_button_3.grid(row=5, column=0, pady=10, padx=20, sticky="n")
 
+        # create slider for joint angle
+        self.slider_progressbar_frame = customtkinter.CTkFrame(self)
+        self.slider_progressbar_frame.grid(row=2, column=0, padx=(20, 0), pady=(20, 0), sticky="nsew")
+        self.slider_progressbar_frame.grid_columnconfigure(0, weight=1)
+        self.slider_progressbar_frame.grid_rowconfigure(2, weight=1)
+        self.slider_1 = customtkinter.CTkSlider(self.slider_progressbar_frame, from_=0, to=180, number_of_steps=180)
+        self.slider_1.grid(row=1, column=0, padx=(20, 10), pady=(10, 10), sticky="ew")
+        self.slider_label = customtkinter.CTkLabel(self.slider_progressbar_frame, text=f"Joint Angle: {self.slider_1.get():.0f} degree", anchor="w")
+        self.slider_label.grid(row=0, column=0, padx=20, pady=(10, 0))
+
         # create settings frame with widgets
         self.appearance_mode_label = customtkinter.CTkLabel(self.sidebar_frame, text="Appearance Mode:", anchor="w")
         self.appearance_mode_label.grid(row=6, column=0, padx=20, pady=(10, 0))
