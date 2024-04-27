@@ -147,6 +147,18 @@ Gain20: red contribution to the blue pixel/Gain21: green contribution to the blu
         with open(filename, 'wb') as file:
             file.write(result.get_response_data())
 
+    
+    def get_image(self):
+        """Note: requires some time to generate image"""
+
+        image_header = NXTRestConnection.get_image_accept_header_by_filename('dummy.jpg')
+        header = {'Accept': image_header.value}
+        params = {'quality': 80}
+
+        result = self.rest_connection.get(f'/camera/image', params=params, additional_headers=header)
+
+        return result.get_response_data()
+
     def get_camera_test_image_latest_options(self):
         return self.rest_connection.options('/camera/image/testimage').to_json()["GET"]["application/json"]
 
