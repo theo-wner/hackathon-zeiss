@@ -23,3 +23,5 @@ http://169.254.75.124/camera/image
 http://169.254.75.124/streaming/stream3/video.mjpeg
 ### IDS Theos Thinkpad ip
 169.254.75.125
+### powerpoint pitch
+https://docs.google.com/presentation/d/1iSkoOl0yah5KpdID4hNd-COoQksmoF1874Q4Z5aXhGo/edit?usp=sharing
