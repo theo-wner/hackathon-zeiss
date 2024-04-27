@@ -10,3 +10,12 @@ conda create --name hackathon python=3.9
 3. git add [your files]
 4. git commit -m "message"
 5. git push origin main
+
+
+### IDS anmeldedaten
+email:robert.langendoerfer@gmx.net
+pwd:  S"Vanjnmr2Ai7;x
+### IDS malibu ip
+169.254.75.124
+### IDS Theos Thinkpad ip
+169.254.75.125
