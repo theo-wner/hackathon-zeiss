@@ -45,3 +45,10 @@ TrainCorrect
 ### Logo-Ideas:
 <img src="https://github.com/theo-wner/hackathon-zeiss/assets/139447140/dd3b4ca5-4ac4-4224-9ff5-6461e5abc097" width="300" height="300">
 <img src="https://github.com/theo-wner/hackathon-zeiss/assets/139447140/a76e1205-fe19-4cac-9a66-91a60fd30b24" width="300" height="300">
+<img src="https://github.com/theo-wner/hackathon-zeiss/assets/139447140/59151c3e-3ac9-4a85-8724-af99e396c01e" width="300" height="300">
+
+
+
+
+
+
