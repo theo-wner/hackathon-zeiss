@@ -16,7 +16,7 @@ conda create --name hackathon python=3.12
 email:robert.langendoerfer@gmx.net
 pwd:  S"Vanjnmr2Ai7;x
 ### IDS malibu ip
-169.254.75.124
+http://169.254.75.124
 ### IDS Single Image
 http://169.254.75.124/camera/image
 ### IDS Video Stream
