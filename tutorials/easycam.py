@@ -1,4 +1,5 @@
 import cv2
+import json
 from ultralytics import YOLO
 import torch
 
@@ -15,7 +16,8 @@ for result in results:
     filename = f'txt/keypoints_data_{frame_count}.txt'
 
     with open(filename, 'w') as f:
-        f.write(str(keypoints.xyn))
+        data_list = keypoints.xyn.cpu().numpy().tolist()
+        json.dump(data_list, f)
 
     frame_count += 1
 
