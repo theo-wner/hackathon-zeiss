@@ -8,3 +8,8 @@ results = model.predict(source="0", show=True)
 
 print(results)
 
+for r in results:
+    boxes = r.boxes
+    keypoints = r.keypoints
+    print("Keypoints --->")
+    print(keypoints)
