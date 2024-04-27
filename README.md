@@ -12,8 +12,10 @@ conda create --name hackathon python=3.9y
 5. git push origin main
 
 
-### ids anmeldedaten
+### IDS anmeldedaten
 email:robert.langendoerfer@gmx.net
 pwd:  S"Vanjnmr2Ai7;x
-### ids malibu ip
+### IDS malibu ip
 169.254.75.124
+### IDS Theos Thinkpad ip
+169.254.75.125
