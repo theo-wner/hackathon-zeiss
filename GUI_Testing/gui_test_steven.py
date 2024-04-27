@@ -41,7 +41,8 @@ class MainWindow():
         # change image
         self.canvas.itemconfig(self.image_on_canvas, image=self.my_images[self.my_image_number])
 
-    def draw(self):
+
+    def draw(self, new_image):
         while True:
             self.onButton()
             self.canvas.update()
