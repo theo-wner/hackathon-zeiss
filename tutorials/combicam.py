@@ -12,11 +12,10 @@ results = model.predict(source=source, stream=True)
 
 font = cv2.FONT_HERSHEY_SIMPLEX
 font_scale = 0.4
-color = (255, 255, 255)  # Weiß für die Nummerierung
+color = (255, 255, 255)  # Weiß für die Nummerierung und Winkeltext
 thickness = 1
 line_color = (0, 0, 255)  # Rot für die Linien
 line_thickness = 2
-angle_text = "Angle: N/A"
 
 # Verbindungen, die gezeichnet werden sollen (0-basierte Indizes)
 connections = [(10, 8), (8, 6), (6, 12), (12, 11), (11, 5), (5, 6), (5, 7), (7, 9), (12, 14),
@@ -31,12 +30,11 @@ for result in results:
     img_size = (640, 480)
     image = torch.zeros(
         (img_size[1], img_size[0], 3), dtype=torch.uint8).numpy()
-
     points = []  # List to hold point coordinates
 
     for tensor in tensors:
-        current_points = [(int(p[0] * img_size[0]), int(p[1] * img_size[1]))
-                          for p in tensor]
+        current_points = [
+            (int(p[0] * img_size[0]), int(p[1] * img_size[1])) for p in tensor]
         points.extend(current_points)
         for i, (x, y) in enumerate(current_points):
             if x > 0 and y > 0:
@@ -53,7 +51,7 @@ for result in results:
                 cv2.line(image, start_point, end_point,
                          line_color, line_thickness)
 
-    # Calculate angle between vectors
+    # Calculate angle between vectors and display near point 14
     if len(points) > 16:  # Check if there are enough points
         # Vector from 12 to 14
         v1 = np.array(points[13]) - np.array(points[11])
@@ -65,15 +63,14 @@ for result in results:
             dot_product = np.dot(unit_v1, unit_v2)
             angle = np.arccos(dot_product) * (180 / np.pi)
             angle_text = f"Angle: {angle:.2f}°"
-            print(f"Angle between 12-14 and 14-16: {angle:.2f} degrees")
+            # Display angle near point 14
+            if points[13][0] > 0 and points[13][1] > 0:
+                cv2.putText(image, angle_text, (points[13][0] + 20, points[13][1]), font,
+                            font_scale, color, thickness)
         else:
             print("Angle calculation not possible, missing points.")
     else:
         print("Not enough points for angle calculation.")
-
-     # Display angle
-    cv2.putText(image, angle_text, (10, 30), font,
-                font_scale, color, thickness)
 
     # Display the image
     cv2.imshow('YOLO Keypoints Visualization', image)
