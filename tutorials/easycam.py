@@ -1,15 +1,19 @@
 from ultralytics import YOLO
-#from ultralytics.yolo.v8.detect.predict import DetectionPredictor
-import cv2
 
 model = YOLO("yolo-Weights/yolov8n-pose.pt")
 
-results = model.predict(source="0", show=True)
+# return a generator of Results objects
+results = model.predict(source="0", stream=True)
 
-print(results)
 
-for r in results:
-    boxes = r.boxes
-    keypoints = r.keypoints
-    print("Keypoints --->")
-    print(keypoints)
+for result in results:
+    boxes = result.boxes  # Boxes object for bounding box outputs
+    masks = result.masks  # Masks object for segmentation masks outputs
+    keypoints = result.keypoints  # Keypoints object for pose outputs
+    probs = result.probs  # Probs object for classification outputs
+    obb = result.obb  # Oriented boxes object for OBB outputs
+    result.show()  # display to screen
+    result.save(filename='result.jpg')  # save to disk
+
+
+
