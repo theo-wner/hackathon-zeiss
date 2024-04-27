@@ -51,8 +51,8 @@ class App(customtkinter.CTk):
         self.scaling_optionemenu.grid(row=9, column=0, padx=20, pady=(10, 20))
 
         # Create CTkImage
-        self.my_image = customtkinter.CTkImage(light_image=Image.open("../GUI_Testing/test_image.jpg"),
-                                          dark_image=Image.open("../GUI_Testing/test_image.jpg"), size=(1200, 740))
+        self.my_image = customtkinter.CTkImage(light_image=Image.open("test.jpg"),
+                                          dark_image=Image.open("test.jpg"), size=(1280, 720))
         self.my_image_label = customtkinter.CTkLabel(self, image=self.my_image, text="")
         self.my_image_label.grid(row=0, rowspan=6, column=1, padx=(20, 0), pady=(20, 0), sticky="n")
 
@@ -76,15 +76,22 @@ class App(customtkinter.CTk):
         customtkinter.set_widget_scaling(new_scaling_float)
 
     def sidebar_button_event(self):
-        self.my_image.configure(light_image=Image.open("../GUI_Testing/test_image_1.jpg"))
-        self.my_image.configure(dark_image=Image.open("../GUI_Testing/test_image_1.jpg"))
+        self.my_image.configure(light_image=Image.open("test_image_1.jpg"))
+        self.my_image.configure(dark_image=Image.open("test_image_1.jpg"))
 
     def sidebar_button_event_squat(self):
         self.textbox.insert("0.0", "You're squatting right now, we will watch over your form!\n")
-        self.my_image.configure(light_image=Image.open("../GUI_Testing/test_image.jpg"))
-        self.my_image.configure(dark_image=Image.open("../GUI_Testing/test_image.jpg"))
+        self.my_image.configure(light_image=Image.open("test_image.jpg"))
+        self.my_image.configure(dark_image=Image.open("test_image.jpg"))
+
+    def change_image(self, image):
+        self.my_image.configure(light_image=image)
+        self.my_image.configure(dark_image=image)
 
 
 if __name__ == "__main__":
     app = App()
-    app.mainloop()
+    while True:
+        app.update()
+    
+    # app.mainloop()

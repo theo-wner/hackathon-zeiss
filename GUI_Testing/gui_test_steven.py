@@ -42,11 +42,10 @@ class MainWindow():
         self.canvas.itemconfig(self.image_on_canvas, image=self.my_images[self.my_image_number])
 
 
-    def draw(self, new_image):
-        while True:
-            self.onButton()
-            self.canvas.update()
-            self.canvas.after(100)
+    def draw(self):
+        self.onButton()
+        self.canvas.update()
+        self.canvas.after(100)
 
 #-----------------------------------------------------------------------------------------------
 
@@ -55,5 +54,6 @@ customtkinter.set_default_color_theme('green')
 
 root = customtkinter.CTk()
 window = MainWindow(root)
-window.draw()
-# root.mainloop()
+while True:
+    window.canvas.update()
+    window.draw()

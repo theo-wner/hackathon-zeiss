@@ -124,10 +124,15 @@ def yield_pose_images(camera_handler, model):
         img = camera_handler.get_image()
         img = Image.open(BytesIO(img))
         img = np.array(img)
+        # downscale image to 720p
+        img = cv2.resize(img, (1280, 720))
         img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
 
         if frame_count % 1 == 0:
             results = model(img, stream=True)
-            img = draw_keypoints(img, results)
+            try:
+                img = draw_keypoints(img, results)
+            except:
+                pass
 
         yield img

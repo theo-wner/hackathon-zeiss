@@ -3,7 +3,7 @@ import tkinter.messagebox
 import customtkinter
 from PIL import Image
 
-customtkinter.set_appearance_mode("System")  # Modes: "System" (standard), "Dark", "Light"
+customtkinter.set_appearance_mode("Dark")  # Modes: "System" (standard), "Dark", "Light"
 customtkinter.set_default_color_theme("blue")  # Themes: "blue" (standard), "green", "dark-blue"
 
 
@@ -51,8 +51,8 @@ class App(customtkinter.CTk):
         self.scaling_optionemenu.grid(row=9, column=0, padx=20, pady=(10, 20))
 
         # Create CTkImage
-        self.my_image = customtkinter.CTkImage(light_image=Image.open("test_image.jpg"),
-                                          dark_image=Image.open("test_image.jpg"), size=(1200, 740))
+        self.my_image = customtkinter.CTkImage(light_image=Image.open("logo.png"),
+                                          dark_image=Image.open("logo.png"), size=(1200, 740))
         self.my_image_label = customtkinter.CTkLabel(self, image=self.my_image, text="")
         self.my_image_label.grid(row=0, rowspan=6, column=1, padx=(20, 0), pady=(20, 0), sticky="n")
 
@@ -87,4 +87,9 @@ class App(customtkinter.CTk):
 
 if __name__ == "__main__":
     app = App()
-    app.mainloop()
+    while True:
+        app.update()
+    
+    
+    
+    # app.mainloop()
