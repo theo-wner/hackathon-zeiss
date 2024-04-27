@@ -8,7 +8,7 @@ cap.set(3, 640)
 cap.set(4, 480)
 
 # model
-model = YOLO("yolo-Weights/yolov8n.pt")
+model = YOLO("yolo-Weights/yolov8n-pose.pt")
 
 # object classes
 classNames = ["person", "bicycle", "car", "motorbike", "aeroplane", "bus", "train", "truck", "boat",
@@ -33,29 +33,41 @@ while True:
     success, img = cap.read()
     
     # only update every x frames
-    if frame_count % 10 == 0:
+    if frame_count % 1 == 0:
         results = model(img, stream=True)
         if results is not None:
             # coordinates
             for r in results:
                 boxes = r.boxes
+                keypoints = r.keypoints
+                print("Keypoints --->")
+                print(keypoints)
 
     if boxes is not None:
-        for box in boxes:
+        for box in boxes:            
             # bounding box
             x1, y1, x2, y2 = box.xyxy[0]
             x1, y1, x2, y2 = int(x1), int(y1), int(x2), int(y2) # convert to int values
 
+            # Draw keypoints
+            if 'keypoints' in dir(box):
+                for keypoint in box.keypoints:
+                    for kp in keypoint:
+                        x, y = int(kp[0]), int(kp[1])
+                        
             # put box in cam
             cv2.rectangle(img, (x1, y1), (x2, y2), (255, 0, 255), 3)
 
+            # put circle in cam
+            cv2.circle(img, (x, y), 5, (0, 255, 0), -1)
+
             # confidence
             confidence = math.ceil((box.conf[0]*100))/100
-            print("Confidence --->",confidence)
+            #print("Confidence --->",confidence)
 
             # class name
             cls = int(box.cls[0])
-            print("Class name -->", classNames[cls])
+            #print("Class name -->", classNames[cls])
 
             # object details
             org = [x1, y1]
