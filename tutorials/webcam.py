@@ -39,27 +39,16 @@ while True:
             # coordinates
             for r in results:
                 boxes = r.boxes
-                keypoints = r.keypoints
-                print("Keypoints --->")
-                print(keypoints)
+
 
     if boxes is not None:
         for box in boxes:            
             # bounding box
             x1, y1, x2, y2 = box.xyxy[0]
             x1, y1, x2, y2 = int(x1), int(y1), int(x2), int(y2) # convert to int values
-
-            # Draw keypoints
-            if 'keypoints' in dir(box):
-                for keypoint in box.keypoints:
-                    for kp in keypoint:
-                        x, y = int(kp[0]), int(kp[1])
                         
             # put box in cam
             cv2.rectangle(img, (x1, y1), (x2, y2), (255, 0, 255), 3)
-
-            # put circle in cam
-            cv2.circle(img, (x, y), 5, (0, 255, 0), -1)
 
             # confidence
             confidence = math.ceil((box.conf[0]*100))/100
