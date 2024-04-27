@@ -11,10 +11,9 @@ conda create --name hackathon python=3.12
 4. git commit -m "message"
 5. git push origin main
 
-
 ### IDS anmeldedaten
-email:robert.langendoerfer@gmx.net
-pwd:  S"Vanjnmr2Ai7;x
+email: robert.langendoerfer@gmx.net
+pwd: S"Vanjnmr2Ai7;x
 ### IDS malibu ip
 http://169.254.75.124
 ### IDS Single Image
@@ -26,8 +25,7 @@ http://169.254.75.124/streaming/stream3/video.mjpeg
 ### powerpoint pitch
 https://docs.google.com/presentation/d/1iSkoOl0yah5KpdID4hNd-COoQksmoF1874Q4Z5aXhGo/edit?usp=sharing
 
-
-Names-Ideas:
+### Names-Ideas:
 PoseFit Trainer
 ExactFit Coach
 FlexiPose
@@ -44,9 +42,6 @@ FitForm Coach
 PosePrecision
 TrainCorrect
 
-
-Logo-Ideas:
-![Logo1](https://github.com/theo-wner/hackathon-zeiss/assets/139447140/dd3b4ca5-4ac4-4224-9ff5-6461e5abc097)
-![Logo2](https://github.com/theo-wner/hackathon-zeiss/assets/139447140/a76e1205-fe19-4cac-9a66-91a60fd30b24)
-
-
+### Logo-Ideas:
+<img src="https://github.com/theo-wner/hackathon-zeiss/assets/139447140/dd3b4ca5-4ac4-4224-9ff5-6461e5abc097" width="300" height="300">
+<img src="https://github.com/theo-wner/hackathon-zeiss/assets/139447140/a76e1205-fe19-4cac-9a66-91a60fd30b24" width="300" height="300">
