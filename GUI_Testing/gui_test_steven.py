@@ -8,6 +8,7 @@ Description:
 """
 
 from tkinter import *
+import customtkinter
 
 class MainWindow():
     def __init__(self, main):
@@ -26,7 +27,7 @@ class MainWindow():
         self.image_on_canvas = self.canvas.create_image(0, 0, anchor='nw', image=self.my_images[self.my_image_number])
         
         # button to change image
-        self.button = Button(main, text="Change", command=self.onButton)
+        self.button = customtkinter.CTkButton(main, text="Change", command=self.onButton)
         self.button.grid(row=1, column=0)
 
     def onButton(self):
@@ -44,11 +45,14 @@ class MainWindow():
         while True:
             self.onButton()
             self.canvas.update()
-            self.canvas.after(10)
+            self.canvas.after(100)
 
 #-----------------------------------------------------------------------------------------------
 
-root = Tk()
+customtkinter.set_appearance_mode('dark')
+customtkinter.set_default_color_theme('green')
+
+root = customtkinter.CTk()
 window = MainWindow(root)
 window.draw()
 # root.mainloop()
