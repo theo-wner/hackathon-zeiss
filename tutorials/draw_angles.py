@@ -67,21 +67,11 @@ def draw_angle(points, interest_index, angle_threshold, draw_points=False, draw_
     angle = np.degrees(angle)
     if angle < 0:
         angle = abs(angle)
-        #swap the points        
-        p1_new = p3
-        p3_new = p1
-        p1 = p1_new
-        p3 = p3_new
-        
+
 
     if angle > 180:
         angle = 360 - angle
-        #swap the points
-        p1_new = p3
-        p3_new = p1
-        p1 = p1_new
-        p3 = p3_new
-
+        
     img = np.zeros((400, 400, 3), dtype=np.uint8)
 
     # draw the points
@@ -102,18 +92,31 @@ def draw_angle(points, interest_index, angle_threshold, draw_points=False, draw_
         cv2.line(img, p3, p1, (0, 255, 0), 1)  # green line
 
     # draw the oriented arc between the lines start at line p1-p2 and end at line p2-p3
-    start_angle = np.degrees(np.arctan2(p1[1] - p2[1], p1[0] - p2[0]))
-    end_angle = np.degrees(np.arctan2(p3[1] - p2[1], p3[0] - p2[0]))
-
+    angle_p1_p2 = np.degrees(np.arctan2(p1[1] - p2[1], p1[0] - p2[0]))
+    angle_p3_p2 = np.degrees(np.arctan2(p3[1] - p2[1], p3[0] - p2[0]))
     
-    if end_angle < start_angle:
-        #swap the angles
-        start_angle_new = end_angle
-        end_angle_new = start_angle
-        start_angle = start_angle_new
-        end_angle = end_angle_new
-        #put text ''swapped'' on the image
-        cv2.putText(img, 'swapped', (p2[0] - 10, p2[1] - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 1)
+    if angle_p1_p2 < 0:
+        angle_p1_p2 += 360
+    if angle_p3_p2 < 0:
+        angle_p3_p2 += 360
+
+    small_angle = min(angle_p1_p2, angle_p3_p2) 
+    big_angle = max(angle_p1_p2, angle_p3_p2)
+
+    if big_angle - small_angle < 180:
+        start_angle = small_angle
+        end_angle = big_angle
+    else:
+        start_angle = big_angle
+        end_angle = small_angle  
+        #put text small angle
+        cv2.putText(img,str(round(small_angle)), (p2[0] + 10, p2[1] + 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 1)
+        cv2.putText(img,str(round(big_angle)), (p2[0] + 10, p2[1] + 20), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 1)
+
+        if start_angle >180:
+            start_angle = start_angle - 360
+        if end_angle > 180:
+            end_angle = end_angle - 360
         
 
     if angle < angle_threshold:
@@ -132,5 +135,6 @@ def draw_angle(points, interest_index, angle_threshold, draw_points=False, draw_
 if __name__ == '__main__':
     #create random 20 points
     points = [(random.randint(0, 400), random.randint(0, 400)) for _ in range(20)]
-    draw_angle(points, [13,14,15], 45, draw_points=True, draw_green_lines=True)
+    points = [(66, 36), (145, 105), (259, 376)]
+    draw_angle(points, [0,1,2], 45, draw_points=True, draw_green_lines=True)
     
