@@ -1,5 +1,6 @@
 import tkinter
 import tkinter.messagebox
+from tkinter import Tk, font 
 import customtkinter
 from PIL import Image
 

@@ -4,6 +4,7 @@ import cv2
 import numpy as np
 from PIL import Image
 from io import BytesIO
+from pygame import mixer
 
 def draw_keypoints(img, yolo_results):
     # Konfiguration der Zeichenfunktion
@@ -48,6 +49,7 @@ def draw_keypoints(img, yolo_results):
 
 
 def draw_angle(img, points, interest_index, angle_threshold, draw_points=False, line_thickness=1):
+    mixer.init()
     interest_index = np.array(interest_index, dtype=int)
     pts = [point for idx,point in enumerate(points) if idx in interest_index]
     if (0,0) in pts:
@@ -76,6 +78,8 @@ def draw_angle(img, points, interest_index, angle_threshold, draw_points=False, 
         cv2.line(img, p1, p2, (0, 0, 255), line_thickness)  # red line
         cv2.line(img, p2, p3, (0, 0, 255), line_thickness)  # red line
         cv2.line(img, p3, p1, (0, 0, 255), line_thickness)  # red line
+        plays=mixer.Sound("../sounds/token.mpeg")
+        plays.play()
 
     else:
         cv2.line(img, p1, p2, (0, 255, 0), line_thickness)  # green line
