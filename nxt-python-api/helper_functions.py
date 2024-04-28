@@ -8,6 +8,7 @@ from PIL import Image
 from io import BytesIO
 from ultralytics.engine.results import Results
 
+
 def draw_keypoints(img, yolo_results):
     # Konfiguration der Zeichenfunktion
     font=cv2.FONT_HERSHEY_SIMPLEX
@@ -17,7 +18,6 @@ def draw_keypoints(img, yolo_results):
     line_color=(0, 255, 0)
     line_thickness=2
     connections=[(10, 8), (8, 6), (6, 12), (12, 11), (11, 5), (5, 6), (5, 7), (7, 9), (4, 2), (2, 1), (1, 3), (0, 4), (3, 0), (4, 6), (3, 5)]
-
 
     for result in yolo_results:
         if result is not None:
@@ -132,7 +132,7 @@ def yield_pose_images(camera_handler, model):
         img = camera_handler.get_image()
         img = Image.open(BytesIO(img))
         img = np.array(img)
-        img = cv2.resize(img, (1280, 720))
+        img = cv2.resize(img, (640, 360))
         img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
 
         if frame_count % 1 == 0:
