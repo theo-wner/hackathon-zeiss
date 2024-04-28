@@ -1,3 +1,5 @@
+import time
+
 from nxt_rest_connection import NXTRestConnection
 from nxt_malibu_camera_handler import NXTMalibuCameraHandler
 import cv2
@@ -16,7 +18,6 @@ def draw_keypoints(img, yolo_results):
     line_thickness=2
     connections=[(10, 8), (8, 6), (6, 12), (12, 11), (11, 5), (5, 6), (5, 7), (7, 9), (4, 2), (2, 1), (1, 3), (0, 4), (3, 0), (4, 6), (3, 5)]
 
-    # Plotte Punkte und Verbindungen
     for result in yolo_results:
         if result is not None:
             keypoints = result.keypoints
@@ -25,7 +26,10 @@ def draw_keypoints(img, yolo_results):
                 points = [(int(p[0] * img.shape[1]),
                             int(p[1] * img.shape[0])) for p in person]
                 
-                print(points)
+            
+                # check if all points are (0, 0)
+                if all(p == (0, 0) for p in points):
+                    continue
 
                 # Zeichne Punkte und Nummerierungen
                 for idx, (x, y) in enumerate(points):
@@ -41,10 +45,12 @@ def draw_keypoints(img, yolo_results):
                         if start_point[0] > 0 and start_point[1] > 0 and end_point[0] > 0 and end_point[1] > 0:
                             cv2.line(img, start_point, end_point,
                                         line_color, line_thickness)
-                            
-                # Zeichne Winkel
-                img = draw_angle(img, points, [12, 14, 16], 90, draw_points=False, line_thickness=line_thickness)
-                img = draw_angle(img, points, [11, 13, 15], 90, draw_points=False, line_thickness=line_thickness)
+                
+                if len(points) == 17:
+                    img = draw_angle(img, points, [12, 14, 16], 90, draw_points=False, line_thickness=line_thickness)
+                    img = draw_angle(img, points, [11, 13, 15], 90, draw_points=False, line_thickness=line_thickness)
+                else:
+                    print("No keypoints found")
     return img
 
 
@@ -128,15 +134,17 @@ def yield_pose_images(camera_handler, model):
         img = camera_handler.get_image()
         img = Image.open(BytesIO(img))
         img = np.array(img)
-        # downscale image to 720p
-        img = cv2.resize(img, (1280, 720))
+        img = cv2.resize(img, (640, 360))
         img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
 
         if frame_count % 1 == 0:
             results = model(img, stream=True)
-            try:
-                img = draw_keypoints(img, results)
-            except:
-                pass
+            img = draw_keypoints(img, results)
+            # start = time.time()
+            # try:
+            #     img = draw_keypoints(img, results)
+            # except:
+            #     pass
+            # print(f"draw keypoints: {time.time() - start}")
 
         yield img
